@@ -1,0 +1,89 @@
+---
+title: "Smart Farm dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: scroll
+    runtime: shiny
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(ggplot2)
+library(readxl)
+library(tidyverse)
+library(plotly)
+library(ggmap)
+
+library(dplyr)
+library(DT)
+
+#Use knitr root.dir instead of setwd to set directory
+#It is not working
+require(knitr)
+source("failure.R")
+source("power.R")
+
+
+
+smart_predictive=read.csv("C:\\Users\\AdMin\\Desktop\\Nouveau dossier (2)\\predictive_maintenance.csv")
+smart=read.csv("C:\\Users\\AdMin\\Desktop\\Nouveau dossier (2)\\smart.csv")
+smart
+
+```
+
+
+Smart Predict maintenance
+=============================
+Row
+------------------------
+### No failure
+```{r}
+nbrFailure=dplyr::select(filter(smart_predictive,FailureType == "No Failure"), Air_temperature)
+valFailure=dplyr::count(nbrFailure)
+valueBox(value =valFailure, "No failure",color = "red")
+```
+
+### Power failure
+```{r}
+
+nbrPower=dplyr::select(filter(smart_predictive,FailureType == "Power Failure"), Air_temperature)
+valPower=dplyr::count(nbrPower)
+valueBox(value =valPower, "Power failure ",color ="#00FF00")
+```
+
+### Predict
+```{r}
+nbrPredict=dplyr::select(filter(smart,FailureType == "No Failure"), Air_temperature)
+valPredict=dplyr::count(nbrPredict)
+valueBox(value =valPredict, "Predict failure ",color ="#CC0999")
+
+
+```
+
+
+
+Row
+-----------------------------------------------------
+###  Les machine qui tombent en panne
+```{r}
+plot1()
+
+```
+
+### Les machines qui fonctionnent bien
+```{r}
+
+plot2()
+
+```
+
+Row{data-width=650}
+------------------------
+
+###  Les machines qui sera tomber en panne
+```{r}
+smart%>%datatable()
+
+
+```

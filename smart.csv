@@ -1,0 +1,6 @@
+BUDI,Product ID,Type,Air_temperature,Process_temperature,Rotational_speed,Torque,Tool_wear,Target,FailureType
+9975,L57154,L,298.6,308.2,1361,68.2,172,1,No Failure
+9614,L56793,L,299,310.2,1377,62.5,92,1,No Failure
+8927,M23786,M,297.3,308.3,1459,59.6,207,1,No Failure
+8583,M23442,M,297.5,308.1,1334,72,151,1,No Failure
+
